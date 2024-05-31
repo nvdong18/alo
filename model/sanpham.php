@@ -1,14 +1,21 @@
 <?php
 function  insert_sanpham($iddm, $tensp, $giasp, $upfile, $motasp)
 {
-    $sql =  "insert into sanpham(name) values('$iddm', '$tensp', '$tensp' , '$giasp' , '$upfile' , '$motasp' )";
+    $sql =  "insert into sanpham(iddm , name,price , img ,mota ) values('$iddm', '$tensp' , '$giasp' , '$upfile' , '$motasp' )";
     pdo_execute($sql);
 }
-function loadAll_sanpham()
+function loadAll_sanpham($kyw, $iddm)
 {
-    $sql = "select *from sanpham order by id desc";
+    $sql = "select *from sanpham where 1";
+    if ($kyw != "") {
+        $sql .= " and name like '%" . $kyw . "%'";
+    }
+    if ($iddm > 0) {
+        $sql .= " and iddm ='" . $iddm . "'";
+    }
+    $sql .= " order by id desc";
     $query_Allsp = pdo_query($sql);
-    return  $query_Allsp;
+    return $query_Allsp;
 }
 function delete_sanpham()
 {

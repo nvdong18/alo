@@ -35,6 +35,7 @@ if (is_array($query_Onesp)) {
 
 
             <div class="row mb10 ">
+                <input type="hidden" name="id">
                 <input class="mr20" name="themmoi" type="submit" value="THÊM MỚI">
                 <input class="mr20" type="reset" value="NHẬP LẠI">
                 <a href="index.php?act=listsp"><input class="mr20" type="button" value="DANH SÁCH"></a>

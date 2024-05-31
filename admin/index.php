@@ -60,14 +60,23 @@
                 include "./sanpham/add.php";
                 break;
             case 'listsp':
-                $query_Allsp = loadAll_sanpham();
+                if (isset($_POST['timkiem']) && ($_POST['timkiem'])) {
+                    $kyw = $_POST['kyw'];
+                    $iddm = $_POST['iddm'];
+                } else {
+                    $kyw = '';
+                    $iddm = 0;
+                }
+                $query_Alldm = loadAll_danhmuc();
+                $query_Allsp = loadAll_sanpham($kyw, $iddm);
                 include "./sanpham/list.php";
                 break;
             case 'xoasp':
                 if (isset($_GET['id']) && ($_GET['id']) > 0) {
                     delete_sanpham();
                 }
-                $query_Allsp = loadAll_sanpham();
+                $query_Alldm = loadAll_danhmuc();
+                $query_Allsp = loadAll_sanpham("", 0);
                 include "./sanpham/list.php";
                 break;
             case 'suasp':
@@ -80,7 +89,7 @@
                     $tenloai = $_POST['tenloai'];
                     update_sanpham($id, $tenloai);
                 }
-                $query_Allsp = loadAll_sanpham();
+                $query_Allsp = loadAll_sanpham("", 0);
                 include "./sanpham/list.php";
                 break;
             default:
